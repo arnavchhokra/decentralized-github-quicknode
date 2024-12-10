@@ -22,11 +22,11 @@ const navigationItems = [
     description: "",
     },
     {
-    title: "Product",
+    title: "Dashboard",
     description: "Managing a small business today is already tough.",
     },
     {
-    title: "Company",
+    title: "All Repos",
     description: "Managing a small business today is already tough.",
     },
 ];

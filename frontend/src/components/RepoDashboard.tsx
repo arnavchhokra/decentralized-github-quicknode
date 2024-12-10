@@ -11,16 +11,15 @@ import { create } from 'ipfs-http-client';
 import { getIPFSFolder, getIPFSFolderAlternative } from "./retrieveIPFS";
 
 interface RepositoryType {
-  id: number;
   name: string;
+  repoID: number;
   description: string;
   owners: string[];
   cids: string;
-  dateCreated: bigint;
-  lastCommitTime: bigint;
-  isEncrypted: boolean;
-  commitHistory: string[];
+  infoHash:string;
+  isBackUpLatest: boolean;
 }
+
 
 const RepoDashboard: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -44,9 +43,9 @@ const RepoDashboard: React.FC = () => {
   useEffect(() => {
     if (mounted) {
       const segments = window.location.pathname.split('/');
-      console.log(segments)
+      // console.log(segments)
       setRepoId(Number(segments[2]));
-      console.log(repoId); // This should now be safe to run on the client side
+      // console.log(repoId); // This should now be safe to run on the client side
     }
   }, [mounted]); // Run only after the component has mounted
 
@@ -62,13 +61,10 @@ const RepoDashboard: React.FC = () => {
       setName(response.name);
       setDesc(response.description);
       setOwners(response.owners);
-      setCommitHistory(response.commitHistory);
-      setCid(response.cids);
-      setDateCreated(Number(response.dateCreated)); // Convert BigInt to number
-      setLastCommitTime(Number(response.lastCommitTime)); // Convert BigInt to number
-      setIsEncrypted(response.isEncrypted);
+      setCid(response.infoHash);
       console.log(response);
-      console.log(cid, " is cid")
+
+      console.log(response.infoHash, " is infoHash")
     } catch (error) {
       console.error("Error fetching repository data:", error);
     }
@@ -84,9 +80,52 @@ const RepoDashboard: React.FC = () => {
   }, [repoId]); // Fetch repo data whenever repoId changes
 
 
-  useEffect(() => {
-    console.log("CID updated:", cid); // Check if the CID is updated correctly
-  }, [cid]);
+
+
+  useEffect(()=>{
+    const downloadData = async (infoHash) => {
+      try {
+        //@ts-ignore
+        const client = new WebTorrent();
+    
+        console.log(`Connecting to the swarm with infoHash: ${infoHash}`);
+    
+        // Add the torrent using its infoHash
+        client.add(infoHash, (torrent) => {
+          console.log(`Torrent added! Name: ${torrent.name}`);
+    
+          torrent.files.forEach(async (file) => {
+            console.log(`File available: ${file.name}`);
+    
+            // Get the file as a Blob or ArrayBuffer
+            file.getBlob(async (err, blob) => {
+              if (err) {
+                console.error(`Error retrieving file ${file.name}:`, err);
+                return;
+              }
+    
+              console.log(`File ready for download: ${file.name}`);
+            });
+          });
+    
+          torrent.on('done', () => {
+            console.log('Torrent download complete!');
+            client.destroy(); // Clean up the WebTorrent client
+          });
+        });
+    
+        client.on('error', (err) => {
+          console.error('Error with WebTorrent client:', err);
+        });
+      } catch (err) {
+        console.error('Error downloading data:', err);
+      }
+    };
+    downloadData("a91474d96e93c12d96de75beb4125f5c0c7ddeef")
+  },[]);
+  
+
+
   return (
     <div style={{ display: "flex", flexDirection: "column", padding: "30px 10%" }}>
       {!name ? (
@@ -100,6 +139,10 @@ const RepoDashboard: React.FC = () => {
                   <button style={{ width: "30px", height: "30px", borderRadius: "50%", background: "red" }}></button>
                   <p>{name}</p>
                   <Badge variant="outline">Private</Badge>
+                </div>
+                <div>
+                  <b>Seeders</b> : 0 
+                  <b> Leeches</b> : 0 
                 </div>
                 <div style={{ gap: "10px", display: "flex" }}>
                   <Popover>

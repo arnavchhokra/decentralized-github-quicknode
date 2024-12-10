@@ -27,10 +27,10 @@ const RepoCard: React.FC<RepoCardProps> = ({ id,title, description, creatorAddre
             <Card>
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
-                    <CardDescription>{description}{id}</CardDescription>
+                    <CardDescription><b>Description:</b> {description}{id}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>{creatorAddress}</p>
+                    <p> <b>InfoHash: </b>{creatorAddress}</p>
                 </CardContent>
                 <CardFooter>
                     <Button onClick={() => { location.href = link; }}>Link</Button>

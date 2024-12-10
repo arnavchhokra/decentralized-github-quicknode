@@ -85,7 +85,7 @@
 			},
 			{
 				"internalType": "string",
-				"name": "_cids",
+				"name": "_infoHash",
 				"type": "string"
 			},
 			{
@@ -109,7 +109,7 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_cids",
+				"name": "_infoHash",
 				"type": "string"
 			},
 			{
@@ -166,24 +166,14 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "dateCreated",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "lastCommitTime",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "infoHash",
+						"type": "string"
 					},
 					{
 						"internalType": "bool",
-						"name": "isEncrypted",
+						"name": "isBackUpLatest",
 						"type": "bool"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "commitHistory",
-						"type": "uint256[]"
 					}
 				],
 				"internalType": "struct DGIT.Repository[]",
@@ -379,24 +369,14 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "dateCreated",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "lastCommitTime",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "infoHash",
+						"type": "string"
 					},
 					{
 						"internalType": "bool",
-						"name": "isEncrypted",
+						"name": "isBackUpLatest",
 						"type": "bool"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "commitHistory",
-						"type": "uint256[]"
 					}
 				],
 				"internalType": "struct DGIT.Repository",
@@ -439,24 +419,14 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "dateCreated",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "lastCommitTime",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "infoHash",
+						"type": "string"
 					},
 					{
 						"internalType": "bool",
-						"name": "isEncrypted",
+						"name": "isBackUpLatest",
 						"type": "bool"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "commitHistory",
-						"type": "uint256[]"
 					}
 				],
 				"internalType": "struct DGIT.Repository[]",
