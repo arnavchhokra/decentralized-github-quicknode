@@ -51,8 +51,9 @@ const Page: NextPage =() => {
   
   
   const loader = async() =>{
-    const client = new WebTorrent();
-    const db = await initDB();
+    const client = new WebTorrent({
+      tracker: ['wss://tracker.webtorrent.io'] // Example of a WebTorrent tracker
+    });    const db = await initDB();
     const tx = db.transaction('repos','readonly');
     const store = tx.objectStore('repos');
   

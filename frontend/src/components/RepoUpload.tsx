@@ -48,8 +48,9 @@ const RepoUpload = () => {
 
     try{
         //@ts-ignore
-        const client = new WebTorrent();
-      // const response = await uploadToMoralis(files);
+        const client = new WebTorrent({
+          tracker: ['wss://tracker.webtorrent.io'] // Example of a WebTorrent tracker
+        });      // const response = await uploadToMoralis(files);
       // const cid = splitCID(response);
       // console.log(cid)
 
