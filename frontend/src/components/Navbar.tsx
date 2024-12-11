@@ -13,6 +13,8 @@ import { Menu, MoveRight, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import ModeToggle from "./ModeToggle";
+
 
 const Navbar = () => {
 const navigationItems = [
@@ -54,6 +56,7 @@ return (
         <p className="font-semibold">DGIT</p>
         </div>
         <div className="flex justify-end w-full gap-4">
+        <ModeToggle/>
         <ConnectButton/>
         </div>
         <div className="flex w-12 shrink lg:hidden items-end justify-end">
@@ -78,7 +81,9 @@ return (
             </div>
         )}
         </div>
+
     </div>
+
     </header>
 );
 };

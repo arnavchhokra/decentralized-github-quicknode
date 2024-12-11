@@ -20,10 +20,7 @@ export const FAQ = () => (
               This is the start of something new
             </h4>
             <p className="text-lg leading-relaxed tracking-tight text-muted-foreground max-w-xl text-center">
-              Managing a small business today is already tough. Avoid further
-              complications by ditching outdated, tedious trade methods. Our
-              goal is to streamline SMB trade, making it easier and faster than
-              ever.
+            The Decentralized GitHub is a platform that utilizes Peer-to-Peer (P2P) networking to store, retrieve, and manage versioned repositories. This project eliminates reliance on centralized servers, ensuring improved resilience, security, and data availability.
             </p>
           </div>
           <div>
@@ -34,17 +31,14 @@ export const FAQ = () => (
         </div>
 
         <div className="w-full">
-          <Accordion type="single" collapsible className="w-full" >
-            {Array.from({ length: 8 }).map((_, index) => (
+          <Accordion type="single" collapsible className="h-250px" >
+            {Array.from({ length: 3}).map((_, index) => (
               <AccordionItem key={index} value={"index-" + index}>
                 <AccordionTrigger>
                   This is the start of something new
                 </AccordionTrigger>
                 <AccordionContent>
-                  Managing a small business today is already tough. Avoid
-                  further complications by ditching outdated, tedious trade
-                  methods. Our goal is to streamline SMB trade, making it easier
-                  and faster than ever.
+                The Decentralized GitHub is a platform that utilizes Peer-to-Peer (P2P) networking to store, retrieve, and manage versioned repositories. This project eliminates reliance on centralized servers, ensuring improved resilience, security, and data availability.
                 </AccordionContent>
               </AccordionItem>
             ))}

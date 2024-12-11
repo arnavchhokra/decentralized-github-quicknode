@@ -24,10 +24,8 @@ contract DGIT {
         string description;
         address[] owners;
         string cids;
-        uint256 dateCreated;
-        uint256 lastCommitTime;
-        bool isEncrypted;
-        uint256[] commitHistory;
+        string infoHash;
+        bool isBackUpLatest;
     }
 
     uint256 private repoID = 0;
@@ -68,25 +66,22 @@ contract DGIT {
     function createRepo(
         string memory _name,
         string memory _desc,
-        string memory _cids,
+        string memory _infoHash,
         bool _isEncrypted
     ) public returns (uint256) {
         repoID++;
         address[] memory _owners = new address[](1);
         _owners[0] = msg.sender;
 
-        uint256[] memory _commitHistory;
 
         Repository memory repo = Repository({
             repoID: repoID,
             name: _name,
             description: _desc,
             owners: _owners,
-            cids: _cids,
-            dateCreated: block.timestamp,
-            lastCommitTime: block.timestamp,
-            isEncrypted: _isEncrypted,
-            commitHistory: _commitHistory
+            infoHash: _infoHash,
+            cids: "",
+            isBackUpLatest: _isEncrypted
         });
 
         repoByUser[msg.sender].push(repo);
@@ -104,6 +99,7 @@ contract DGIT {
         return repoByID[_id];
     }
 
+
     function getAllRepo() public view returns (Repository[] memory) {
     require(repoID >= 1, "No repositories");
     
@@ -117,6 +113,8 @@ contract DGIT {
     
     return _repo;
 }
+
+
 
     // Create a new pull request
     function createPull(string memory _streamID, uint256 _repoID) public returns (uint256) {
@@ -153,15 +151,14 @@ contract DGIT {
 
     // Merge a pull request into the repository
     function mergePull(
-        string memory _cids,
+        string memory _infoHash,
         uint256 _pullID,
         uint256 _repoID
     ) public returns (bool) {
         require(isOwner(_repoID), "Not Repo Owner");
         require(pullsByID[_pullID].status==Status.OPEN, "Pull Request is not Open");
         pullsByID[_pullID].status = Status.MERGED;
-        repoByID[_repoID].cids = _cids;
-        repoByID[_repoID].commitHistory.push(_pullID);
+        repoByID[_repoID].infoHash = _infoHash;
         return true;
     }
 

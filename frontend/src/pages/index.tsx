@@ -11,7 +11,6 @@ const Home: NextPage =()=> {
       <Hero/>
       <Testimonials/>
       <FAQ/>
-      <Stats/>
     </div>
   )
 }

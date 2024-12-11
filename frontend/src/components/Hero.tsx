@@ -2,6 +2,8 @@ import { useState } from "react";
 import { MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import image from "./image.png"
+import Image from "next/image"; // Import Image from next/image
 
 
 export default function Hero() {
@@ -19,14 +21,11 @@ export default function Hero() {
             </div>
             <div className="flex gap-4 flex-col">
               <h1 className="text-5xl md:text-7xl max-w-lg tracking-tighter text-left font-regular">
-                This is the start of something!
+                Speak Volumes Code Freely
               </h1>
               <p className="text-xl leading-relaxed tracking-tight text-muted-foreground max-w-md text-left">
-                Managing a small business today is already tough. Avoid further
-                complications by ditching outdated, tedious trade methods. Our
-                goal is to streamline SMB trade, making it easier and faster than
-                ever.
-              </p>
+               DCNT GIT is a platform that utilizes Peer-to-Peer (P2P) networking to store, retrieve, and manage versioned repositories. 
+               </p>
             </div>
             <div className="flex flex-row gap-4">
               <Button
@@ -42,7 +41,13 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          <div className="bg-muted rounded-md aspect-square"></div>
+          <div className="bg-muted rounded-md aspect-square overflow-hidden flex">
+          <Image
+              src={image}
+              alt="Hero Image"
+              objectFit="contain" // Ensures the image covers the div while maintaining its aspect ratio
+            />       
+          </div>
         </div>
       </div>
     </div>
